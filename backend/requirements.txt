@@ -7,4 +7,5 @@ pymysql
 pillow
 reportlab
 requests
-
+torch
+torchvision
