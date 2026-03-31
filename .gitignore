@@ -4,7 +4,6 @@ __pycache__/
 *.pyc
 *.db
 .env
-*.pth
 
 # Node
 node_modules/
