@@ -1,9 +1,7 @@
 from pydantic import BaseModel
 
 
-# -----------------------------
-# Create Report (Request)
-# -----------------------------
+
 
 class PatientReportCreate(BaseModel):
 
@@ -14,9 +12,6 @@ class PatientReportCreate(BaseModel):
     confidence: str
 
 
-# -----------------------------
-# Response Schema
-# -----------------------------
 
 class PatientReport(BaseModel):
 
