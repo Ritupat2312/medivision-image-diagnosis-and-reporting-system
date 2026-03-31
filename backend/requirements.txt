@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+<<<<<<< HEAD
+sqlalchemy
+python-multipart
+pydantic
+=======
+python-multipart
+>>>>>>> 774b3b3b4cd022dbead4939f66a9d9bc2a3051ba
+torch
+torchvision
+pillow
