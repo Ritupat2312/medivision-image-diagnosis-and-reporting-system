@@ -1,0 +1,110 @@
+/* ---------------- GLOBAL RESET ---------------- */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------------- ROOT VARIABLES ---------------- */
+
+:root {
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --primary-color: #1565c0;
+  --primary-dark: #0d47a1;
+  --background: #f5f9ff;
+  --text-color: #1a1a1a;
+
+  color: var(--text-color);
+  background-color: var(--background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------- BODY ---------------- */
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd, #ffffff);
+}
+
+/* ---------------- LINKS ---------------- */
+
+a {
+  font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* ---------------- HEADINGS ---------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* ---------------- BUTTON RESET ---------------- */
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* ---------------- INPUT RESET ---------------- */
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* ---------------- IMAGES ---------------- */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------------- SCROLLBAR ---------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1565c0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e3f2fd;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+}
