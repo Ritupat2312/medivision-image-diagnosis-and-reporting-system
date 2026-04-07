@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import API from "../services/api";
 import "../App.css";
 import logo from "../assets/medivision_logo.png";
 
@@ -9,12 +10,12 @@ function Dashboard() {
 
   useEffect(() => {
 
-    fetch("https://medivision-image-diagnosis-and-reporting-system.onrender.com/patients")
-      .then(res => res.json())
-      .then(data => {
-        setPatientCount(data.length);
+    API.get("/patients")
+      .then(res => {
+        setPatientCount(res.data.length);
       })
-      .catch(() => {
+      .catch(err => {
+        console.error("Error fetching patients:", err);
         setPatientCount(0);
       });
 
@@ -53,7 +54,7 @@ function Dashboard() {
           </div>
 
           <div className="stat-box">
-            <h3>Online</h3>
+            <h3 style={{color:"green"}}>Online</h3>
             <p>System Status</p>
           </div>
 
