@@ -3,11 +3,9 @@ uvicorn
 python-multipart
 pydantic
 sqlalchemy
-pymysql
 pillow
 reportlab
 requests
 torch
 torchvision
-opencv-python
-numpy
+psycopg2-binary
