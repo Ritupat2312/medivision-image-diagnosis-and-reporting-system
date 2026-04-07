@@ -11,35 +11,28 @@ function Dashboard() {
   useEffect(() => {
 
     API.get("/patients")
-      .then(res => {
+      .then((res) => {
+        console.log("Patients:", res.data);
         setPatientCount(res.data.length);
       })
-      .catch(err => {
-        console.error("Error fetching patients:", err);
-        setPatientCount(0);
+      .catch((err) => {
+        console.error("Error:", err);
       });
 
   }, []);
 
   return (
-
     <div className="container">
 
       <div className="card">
 
-        <img
-          src={logo}
-          alt="MediVision Logo"
-          className="dashboard-logo"
-        />
+        <img src={logo} alt="MediVision Logo" className="dashboard-logo" />
 
         <h1 className="title">MediVision</h1>
 
         <p className="subtitle">
           AI Powered Medical Image Diagnosis & Reporting System
         </p>
-
-        {/* Dashboard Stats */}
 
         <div className="dashboard-stats">
 
@@ -61,15 +54,12 @@ function Dashboard() {
         </div>
 
         <Link to="/upload">
-          <button className="btn">
-            Start X-Ray Scan
-          </button>
+          <button className="btn">Start X-Ray Scan</button>
         </Link>
 
       </div>
 
     </div>
-
   );
 }
 
