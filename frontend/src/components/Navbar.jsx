@@ -24,9 +24,7 @@ function Navbar() {
 
         <Link to="/upload">Upload</Link>
 
-        <Link to="/patients">History</Link>
-
-        <Link to="/admin">Admin</Link>
+        <Link to="/history">History</Link>
 
       </div>
 

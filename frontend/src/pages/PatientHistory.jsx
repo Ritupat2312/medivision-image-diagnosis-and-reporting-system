@@ -8,49 +8,38 @@ function PatientHistory() {
   useEffect(() => {
 
     API.get("/patients")
-      .then(res => {
-        setPatients(res.data);
-      });
+      .then(res => setPatients(res.data))
+      .catch(err => console.error(err));
 
   }, []);
 
   return (
-    <div className="container">
-      <div className="card">
+    <div>
+      <h2>Patient History</h2>
 
-        <h2>Patient History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Diagnosis</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
 
-        <table>
-
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Gender</th>
-              <th>Diagnosis</th>
-              <th>Confidence</th>
+        <tbody>
+          {patients.map((p) => (
+            <tr key={p.id}>
+              <td>{p.name}</td>
+              <td>{p.age}</td>
+              <td>{p.gender}</td>
+              <td>{p.diagnosis}</td>
+              <td>{p.confidence}</td>
             </tr>
-          </thead>
-
-          <tbody>
-
-            {patients.map((p) => (
-
-              <tr key={p.id}>
-                <td>{p.name}</td>
-                <td>{p.age}</td>
-                <td>{p.gender}</td>
-                <td>{p.diagnosis}</td>
-                <td>{p.confidence}</td>
-              </tr>
-
-            ))}
-
-          </tbody>
-
-        </table>
-
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

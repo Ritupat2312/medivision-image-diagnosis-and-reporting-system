@@ -1,13 +1,18 @@
 import torch
 from torchvision import models, transforms
 from PIL import Image
+import os
 
-# Load trained model
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "xray_model.pth")
+
 model = models.resnet18()
 model.fc = torch.nn.Linear(model.fc.in_features, 2)
 
-model.load_state_dict(torch.load("xray_model.pth", map_location="cpu"))
-model.eval()
+try:
+    model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
+    model.eval()
+except Exception as e:
+    print("Model loading error:", e)
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),

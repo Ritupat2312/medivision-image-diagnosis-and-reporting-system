@@ -6,12 +6,12 @@ from ai_model import analyze_xray
 from database import SessionLocal, engine
 import models
 
-# Create tables
+# Create database tables
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# CORS
+# Enable CORS (for frontend on Vercel)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -20,7 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# DB dependency
+# Database dependency
 def get_db():
     db = SessionLocal()
     try:
@@ -45,7 +45,7 @@ async def analyze(
 
     result = analyze_xray(image.file)
 
-    # Save patient
+    # Save patient to database
     patient = models.Patient(
         name=patient_name,
         age=age,
@@ -56,6 +56,7 @@ async def analyze(
 
     db.add(patient)
     db.commit()
+    db.refresh(patient)
 
     return {
         "patient_name": patient_name,
