@@ -4,6 +4,7 @@ import "../App.css";
 import API from "../services/api";
 
 function Upload() {
+
   const navigate = useNavigate();
 
   const [patientName, setPatientName] = useState("");
@@ -15,6 +16,7 @@ function Upload() {
   const [progress, setProgress] = useState(0);
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     if (!image) {
@@ -23,6 +25,7 @@ function Upload() {
     }
 
     const formData = new FormData();
+
     formData.append("patient_name", patientName);
     formData.append("age", age);
     formData.append("gender", gender);
@@ -32,13 +35,16 @@ function Upload() {
     setProgress(0);
 
     let interval = setInterval(() => {
+
       setProgress((prev) => {
         if (prev >= 95) return prev;
         return prev + 1;
       });
+
     }, 600);
 
     try {
+
       const response = await API.post("/analyze", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -46,8 +52,6 @@ function Upload() {
       });
 
       setProgress(100);
-
-      console.log(response.data);
 
       navigate("/report", {
         state: {
@@ -57,8 +61,10 @@ function Upload() {
       });
 
     } catch (error) {
+
       console.error("Upload error:", error);
       alert("Error analyzing image");
+
     }
 
     clearInterval(interval);
@@ -67,11 +73,12 @@ function Upload() {
 
   return (
     <div className="container">
-      <div className="card">
+
+      <div className="card upload-card">
 
         <h2>Upload X-Ray Image</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="upload-form">
 
           <input
             type="text"
@@ -81,8 +88,6 @@ function Upload() {
             required
           />
 
-          <br /><br />
-
           <input
             type="number"
             placeholder="Age"
@@ -90,8 +95,6 @@ function Upload() {
             onChange={(e) => setAge(e.target.value)}
             required
           />
-
-          <br /><br />
 
           <select
             value={gender}
@@ -103,16 +106,12 @@ function Upload() {
             <option>Female</option>
           </select>
 
-          <br /><br />
-
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files[0])}
             required
           />
-
-          <br /><br />
 
           <button className="btn">
             Analyze Image
@@ -121,27 +120,16 @@ function Upload() {
         </form>
 
         {loading && (
-          <div style={{ marginTop: "20px" }}>
+
+          <div className="progress-section">
 
             <p>🧠 AI analyzing X-ray... Please wait</p>
 
-            <div
-              style={{
-                width: "100%",
-                background: "#ddd",
-                height: "20px",
-                borderRadius: "10px"
-              }}
-            >
+            <div className="progress-bar">
 
               <div
-                style={{
-                  width: `${progress}%`,
-                  background: "#4CAF50",
-                  height: "100%",
-                  borderRadius: "10px",
-                  transition: "width 0.4s"
-                }}
+                className="progress-fill"
+                style={{ width: `${progress}%` }}
               ></div>
 
             </div>
@@ -149,9 +137,11 @@ function Upload() {
             <p>{progress}%</p>
 
           </div>
+
         )}
 
       </div>
+
     </div>
   );
 }

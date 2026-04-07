@@ -50,8 +50,6 @@ ${data.recommendation}
 
       const imgData = event.target.result;
 
-      /* ---------- HEADER ---------- */
-
       doc.addImage(logo, "PNG", 15, 10, 25, 15);
 
       doc.setFont("helvetica", "bold");
@@ -70,8 +68,6 @@ ${data.recommendation}
       doc.text(`Report ID: ${reportId}`, 150, 20);
       doc.text(`Date: ${date}`, 150, 27);
 
-      /* ---------- PATIENT DETAILS ---------- */
-
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
       doc.text("Patient Details", 20, 50);
@@ -84,8 +80,6 @@ ${data.recommendation}
       doc.text(`Gender: ${data.gender}`, 20, 76);
 
       doc.line(20, 85, 190, 85);
-
-      /* ---------- AI RESULT ---------- */
 
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
@@ -100,24 +94,16 @@ ${data.recommendation}
       doc.text("Recommendation:", 20, 130);
       doc.text(data.recommendation, 20, 138);
 
-      /* ---------- XRAY IMAGE ---------- */
-
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
       doc.text("X-Ray Scan", 20, 160);
 
       doc.addImage(imgData, "JPEG", 20, 165, 80, 80);
 
-      /* ---------- STAMP ---------- */
-
       doc.addImage(stamp, "PNG", 120, 210, 35, 35);
-
-      /* ---------- SIGNATURE ---------- */
 
       doc.addImage(sign, "PNG", 120, 245, 50, 15);
       doc.text("Authorized Radiologist", 120, 265);
-
-      /* ---------- FOOTER ---------- */
 
       doc.setFontSize(10);
       doc.text(
@@ -138,8 +124,6 @@ ${data.recommendation}
         "center"
       );
 
-      /* ---------- OUTPUT ---------- */
-
       if (download) {
         doc.save("MEDIVISION_AI_Report.pdf");
       } else {
@@ -152,7 +136,7 @@ ${data.recommendation}
 
   return (
     <div className="container">
-      <div className="card">
+      <div className="card report-card">
 
         <h2>AI Diagnosis Report</h2>
 
@@ -160,38 +144,44 @@ ${data.recommendation}
           <img
             src={URL.createObjectURL(data.image)}
             alt="X-ray"
-            style={{ width: "300px", marginBottom: "20px" }}
+            className="report-image"
           />
         )}
 
-        <p><b>Patient Name:</b> {data.patient_name}</p>
-        <p><b>Age:</b> {data.age}</p>
-        <p><b>Gender:</b> {data.gender}</p>
-        <p><b>Image File:</b> {data.filename}</p>
+        <div className="report-section">
+
+          <p><b>Patient Name:</b> {data.patient_name}</p>
+          <p><b>Age:</b> {data.age}</p>
+          <p><b>Gender:</b> {data.gender}</p>
+          <p><b>Image File:</b> {data.filename}</p>
+
+        </div>
 
         <hr />
 
-        <p><b>Diagnosis:</b> {data.diagnosis}</p>
-        <p><b>Confidence:</b> {data.confidence}</p>
-        <p><b>Recommendation:</b> {data.recommendation}</p>
+        <div className="report-section">
 
-        <br/>
+          <p><b>Diagnosis:</b> {data.diagnosis}</p>
+          <p><b>Confidence:</b> {data.confidence}</p>
+          <p><b>Recommendation:</b> {data.recommendation}</p>
 
-        <button className="btn" onClick={() => generatePDF(false)}>
-          View Report
-        </button>
+        </div>
 
-        <br/><br/>
+        <div className="report-buttons">
 
-        <button className="btn" onClick={() => generatePDF(true)}>
-          Download Professional PDF
-        </button>
+          <button className="btn" onClick={() => generatePDF(false)}>
+            View Report
+          </button>
 
-        <br/><br/>
+          <button className="btn" onClick={() => generatePDF(true)}>
+            Download PDF
+          </button>
 
-        <button className="btn" onClick={shareOnWhatsApp}>
-          Share Report on WhatsApp
-        </button>
+          <button className="btn" onClick={shareOnWhatsApp}>
+            Share on WhatsApp
+          </button>
+
+        </div>
 
       </div>
     </div>

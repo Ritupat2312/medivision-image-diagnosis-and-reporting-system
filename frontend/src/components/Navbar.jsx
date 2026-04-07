@@ -14,7 +14,7 @@ function Navbar() {
           className="nav-logo-img"
         />
 
-        <span>MediVision</span>
+        <span className="nav-title">MediVision</span>
 
       </div>
 
